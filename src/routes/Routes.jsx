@@ -7,6 +7,8 @@ import News from "../pages/News/News/News";
 import LoginLayout from "../layouts/LoginLayout";
 import Login from "../pages/Login/Login/Login";
 import Register from "../pages/Login/Register/Register";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import Terms from "../pages/Login/Terms/Terms";
 
 const router = createBrowserRouter([
     {
@@ -24,6 +26,10 @@ const router = createBrowserRouter([
             {
                 path: 'register',
                 element: <Register></Register>
+            },
+            {
+                path: 'terms',
+                element: <Terms></Terms>
             }
         ]
     },
@@ -34,7 +40,7 @@ const router = createBrowserRouter([
             {
                 path: ':id',
                 element: <Category></Category>,
-                loader: ({params}) => fetch(`http://localhost:5000/categories/${params.id}`)
+                loader: ({params}) => fetch(`https://the-news-dragon-server-sadikra.vercel.app/categories/${params.id}`)
             }
         ]
     }, 
@@ -44,8 +50,8 @@ const router = createBrowserRouter([
         children: [
             {
                 path: ':id',
-                element: <News></News>,
-                loader: ({params}) => fetch(`http://localhost:5000/news/${params.id}`)
+                element: <PrivateRoute><News></News></PrivateRoute>,
+                loader: ({params}) => fetch(`https://the-news-dragon-server-sadikra.vercel.app/news/${params.id}`)
             }
         ]
     }, 
